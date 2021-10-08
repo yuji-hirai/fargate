@@ -1,0 +1,15 @@
+version: '3'
+services:
+  wordpress:
+    build: . # カレントディレクトリのDockerfileでイメージをビルド
+    image: wordpress # イメージ名はwordpress-test2とする
+    ports:
+      - '80:80' # ローカルのport80でコンテナのport80にアクセスできるようにする
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wp_user
+      WORDPRESS_DB_PASSWORD: wp_pass
+
+
+
