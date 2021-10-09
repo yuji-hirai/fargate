@@ -10,13 +10,13 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t wordpress .
-      - docker tag wordpress:latest 161750041531.dkr.ecr.p-northeast-1.amazonaws.com/wordpress:latest
+      - docker tag wordpress:latest 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
       - docker push 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"wordpres","imageUri":"%s"}]' 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest > imagedefinitions.json
+      - printf '[{"name":"wordpress","imageUri":"%s"}]' 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
