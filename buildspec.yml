@@ -16,7 +16,7 @@ phases:
       - echo Pushing the Docker image...
       - docker push 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"wordpress","imageUri":"%s"}]' 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest > imagedefinitions.json
+      - printf '[{"name":"wordpres","imageUri":"%s"}]' 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
