@@ -1,11 +1,16 @@
 version: 0.2
 
+env:
+  parameter-store:
+    DOCKER_USER: DOCKER_HUB_ID
+    DOCKER_PASSWORD: DOCKER_HUB_PASSWORD
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com
-      - echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_ID} --password-stdin
+      - echo ${DOCKER_PASSWORD} | docker login -u ${DOCKER_USER} --password-stdin
   build:
     commands:
       - echo Build started on `date`
@@ -15,7 +20,7 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest
+      - docker push --all-tags 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest
       - echo Writing image definitions file...
       - printf '[{"name":"wordpress","imageUri":"%s"}]' 161750041531.dkr.ecr.ap-northeast-1.amazonaws.com/wordpress:latest > imagedefinitions.json
 artifacts:
